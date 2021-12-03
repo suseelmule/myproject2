@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="142febbc-89dd-4a9b-8853-cd1a39a8e6be" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<flow name="setvariable-appFlow" doc:id="6423e659-90e3-451f-8ab7-c0d2d0e4b3d3" >
+		<http:listener doc:name="Listener" doc:id="3022d333-5e91-43b6-b82d-55a35140449d" config-ref="HTTP_Listener_config" path="/myvariable"/>
+		<set-variable value="Susheel" doc:name="firstname" doc:id="988ad0d9-6dd0-47ea-bac3-8d95a591e80c" variableName="firstname"/>
+		<set-variable value="Doraikannu" doc:name="lastname" doc:id="ef5d9e53-dac9-4fde-b879-6166f37f479a" variableName="lastname"/>
+		<set-variable value="#[payload]" doc:name="mypayload" doc:id="e610aa33-9af2-4390-b3ea-676b2d26d149" variableName="mypayload"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d5de203d-872a-46bf-9ce6-9d5d0bc82280" message='#[vars.firstname++" "++ vars.lastname]'/>
+	</flow>
+</mule>
